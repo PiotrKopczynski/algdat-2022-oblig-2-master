@@ -37,10 +37,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
+        if (a==null) {
+            throw new NullPointerException("Tabellen a er null!");
+        }
+
+
         throw new UnsupportedOperationException();
     }
 
@@ -51,7 +56,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public int antall() {
         Node<T> current = hode;
-        int count = 1;
+        int count = 0;
         while (current!=null && current.neste!=null) {
             count++;
             current = current.neste;
@@ -61,7 +66,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+
+        return hode == null;
+
+        //throw new UnsupportedOperationException();
     }
 
     @Override
