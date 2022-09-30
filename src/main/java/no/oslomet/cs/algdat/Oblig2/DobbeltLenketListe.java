@@ -33,10 +33,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // instansvariabler
     private Node<T> hode;          // peker til den første i listen
     private Node<T> hale;          // peker til den siste i listen
-    private int antall;            // antall noder i listen
+    private int antall = 0;            // antall noder i listen
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
+
+        antall = 0;
+        endringer = 0;
+
         //throw new UnsupportedOperationException();
     }
 
@@ -44,43 +48,38 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (a==null) {
             throw new NullPointerException("Tabellen a er null!");
         }
-        else if (a.length==1) {
-            hode.verdi=a[0];
-            hale.verdi=a[0];
+        else if (a.length==0) {
+            return;
         }
         else{
-
             int count = 0;
-            while (true) {
-                if (a[count] != null) {
-                    hode = new Node<T>(a[count]);
-                    count++;
-                    break;
-                }
-            }
-
-            for (int i = 0;i<a.length-1;i++) {
-                if (a[i]!=null) {
-                    Node<T> current = new Node<T>(a[i]);
-                    if (hode==null) {
+            Node<T> current = new Node<T>(a[count]);
+            while (true) { //finner først hode som ikke er null
+                if (count < a.length) {
+                    if (a[count] != null) {
+                        current.verdi = a[count];
                         hode = current;
                         antall++;
                         break;
                     }
-                    else {
-                        current.neste = new Node<T>(a[i],current,null);
-                        if (hode.neste==null) {
-                            hode.neste = current;
-                        }
-                    }
+                    count++;
+                }
+                else {
+                    break;
                 }
             }
+            for (int i = count+1;i<a.length;i++) { //fortsetter å legge til noder etter hode
+                if (a[i]!=null) {
+                    Node<T> next = new Node<T>(a[i]);
+                    current.neste = next;
+                    next.forrige = current;
+                    current = next;
+                    antall++;
+                }
+            }
+            hale = current;
         }
 
-
-
-
-        throw new UnsupportedOperationException();
     }
 
     public Liste<T> subliste(int fra, int til) {
@@ -89,13 +88,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        Node<T> current = hode;
-        int count = 0;
-        while (current!=null && current.neste!=null) {
-            count++;
-            current = current.neste;
-        }
-        return count;
+        return antall;
     }
 
     @Override
