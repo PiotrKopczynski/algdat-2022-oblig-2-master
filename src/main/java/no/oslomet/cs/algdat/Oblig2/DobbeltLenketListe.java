@@ -146,6 +146,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
+
+        StringBuilder result = new StringBuilder();
+
+        Node<T> current = hode;
+        result.append("[").append(current.verdi).append(", ");
+
+        for (int i = 0;i<antall-1;i++) {
+            result.append(current.verdi).append(", ");
+        }
+
         throw new UnsupportedOperationException();
     }
 
