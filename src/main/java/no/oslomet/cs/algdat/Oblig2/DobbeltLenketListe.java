@@ -105,7 +105,38 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return current;
     }
 
-    public Liste<T> subliste(int fra, int til) {throw new UnsupportedOperationException();
+    private void fratilKontroll(int antall, int fra, int til) { // redigert programkode 1.2.3 a) fra kompendiet
+        if (fra < 0)                                  // fra er negativ
+            throw new IndexOutOfBoundsException
+                    ("fra(" + fra + ") er negativ!");
+
+        if (til > antall)                          // til er utenfor tabellen
+            throw new IndexOutOfBoundsException
+                    ("til(" + til + ") > antall(" + antall + ")");
+
+        if (fra > til)                                // fra er større enn til
+            throw new IllegalArgumentException
+                    ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+    }
+
+    public Liste<T> subliste(int fra, int til) {
+        fratilKontroll(antall, fra, til);
+
+        Liste<T> resultat = new DobbeltLenketListe<T>();
+
+        if (fra == til) {
+            return resultat;
+        }
+
+        Node<T> current = finnNode(fra);
+
+        for (int i = fra; i<til; i++) {
+            resultat.leggInn(current.verdi);
+            current = current.neste;
+        }
+
+        return resultat;
+        //throw new UnsupportedOperationException();
     }
 
     @Override
