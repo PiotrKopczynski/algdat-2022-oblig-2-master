@@ -33,6 +33,9 @@ class DobbeltLenketListeTest {
 
     @Test
     void hent() {
+        Integer[] list = {1,2,3,4,5,6};
+        DobbeltLenketListe<Integer> test = new DobbeltLenketListe<>(list);
+        assertEquals(6,test.hent(5));
     }
 
     @Test
