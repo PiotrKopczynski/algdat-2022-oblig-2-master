@@ -257,7 +257,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        Objects.requireNonNull(verdi);
+
+        boolean result = false;
 
         if (antall == 0) {
             return false;
@@ -266,34 +267,36 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             Node<T> fjernes = hode;
             for (int i = 0; i<antall; i++) {
                 if (fjernes.verdi.equals(verdi)) {
-                    antall--;
-                    endringer++;
                     if (antall == 1) {
                         hode = null;
                         hale = null;
-                        return true;
-                    }
-                    if (i == 0) {
-                        hode.neste.forrige = null;
-                        hode = hode.neste;
-                        return true;
-                    }
-                    else if (i == antall-1) {
-                        hale.forrige.neste = null;
-                        hale = hale.forrige;
-                        return true;
+                        result = true;
                     }
                     else {
-                        fjernes.neste.forrige = fjernes.forrige;
-                        fjernes.forrige.neste = fjernes.neste;
-                        return true;
+                        if (i == 0) {
+                            hode.neste.forrige = null;
+                            hode = hode.neste;
+                            result = true;
+                        }
+                        else if (i == antall-1) {
+                            hale.forrige.neste = null;
+                            hale = hale.forrige;
+                            result = true;
+                        }
+                        else {
+                            fjernes.neste.forrige = fjernes.forrige;
+                            fjernes.forrige.neste = fjernes.neste;
+                            result = true;
+                        }
                     }
+                    antall--;
+                    endringer++;
+                    break;
                 }
                 fjernes = fjernes.neste;
             }
         }
-        return false;
-        //throw new UnsupportedOperationException();
+        return result;
     }
 
     @Override
