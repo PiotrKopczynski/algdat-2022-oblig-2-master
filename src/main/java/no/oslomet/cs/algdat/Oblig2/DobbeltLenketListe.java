@@ -6,6 +6,7 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -28,13 +29,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private Node(T verdi) {
             this(verdi, null, null);
         }
+
     }
 
     // instansvariabler
     private Node<T> hode;          // peker til den første i listen
     private Node<T> hale;          // peker til den siste i listen
     private int antall = 0;            // antall noder i listen
-    private int endringer;         // antall endringer i listen
+    private int endringer = 0;         // antall endringer i listen
 
     public DobbeltLenketListe() {
 
@@ -82,6 +84,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     }
 
+
     public Liste<T> subliste(int fra, int til) {
         throw new UnsupportedOperationException();
     }
@@ -101,7 +104,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+
+        Objects.requireNonNull(verdi);
+
+        if (antall==0) {
+            hode = new Node<T>(verdi);
+            hale = hode;
+        }
+        else {
+            Node<T> ny = new Node<T>(verdi);
+            hale.neste = ny;
+            ny.forrige = hale;
+            hale = ny;
+        }
+
+        antall++;
+        endringer++;
+
+        return true;
+        //throw new UnsupportedOperationException();
     }
 
     @Override
@@ -147,20 +168,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public String toString() {
 
+        if (antall==0){
+            return "[]";
+        }
+
         StringBuilder result = new StringBuilder();
 
         Node<T> current = hode;
-        result.append("[").append(current.verdi).append(", ");
+        result.append("[").append(current.verdi);
 
-        for (int i = 0;i<antall-1;i++) {
-            result.append(current.verdi).append(", ");
+
+        for (int i = 1;i<antall;i++) {
+            current = current.neste;
+            result.append(", ").append(current.verdi);
         }
 
-        throw new UnsupportedOperationException();
+        result.append("]");
+        return result.toString();
+
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+
+        if (antall==0){
+            return "[]";
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        Node<T> current = hale;
+        result.append("[").append(current.verdi);
+
+
+        for (int i = antall-2;i>=0;i--) {
+            current = current.forrige;
+            result.append(", ").append(current.verdi);
+        }
+
+        result.append("]");
+        return result.toString();
+
     }
 
     @Override
