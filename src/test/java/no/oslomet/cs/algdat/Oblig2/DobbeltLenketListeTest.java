@@ -62,7 +62,7 @@ class DobbeltLenketListeTest {
         long tid = System.currentTimeMillis();
         liste.nullstill();
         tid = System.currentTimeMillis() - tid;
-        System.out.println("Lista: " + liste.toString());
+        System.out.println("Lista: " + liste);
         System.out.println("Tiden ble: " + tid);
         assertEquals(0,0);
     }

@@ -55,4 +55,28 @@ noden skal bli satt inn finnes med metoden finnNode(). Deretter endres neste pek
 forrige pekerne til den nye noden, og til slutt endres pekeren til noden vi fant med finnNode() til å peke på den nye noden. endringer og antall
 inkrementeres på slutten med 1.
 
+Metoden fjern(int indeks) i oppgave 6 implementeres ved å først kontrollere indeksen med indeksKontroll(). Deretter behandles de ulike spesialtilfellene
+i forsjellige if setninger. Først behandles tilfellet der listen er tom, slik at ingenting blir endret og null returneres. Dersom listen har bare
+et element, lagres verdien til noden og hode og hale gjøres om til null. Deretter sjekkes tilfellene der det første eller siste elementet blir fjerner.
+Da lagres verdien til noden som fjernes og hode og hale nodene blir endret til henhondsvis det nest første eller neste siste element der også neste/forrige
+peker blir enret til null. Til slutt behandles tilfellet det en node som ligger mellom to noder blir fjernet. Noden som skal fjernes finnes først med 
+metoden finnNode(indeks). Verdien til noden lagres og pekerne til forrige og neste noden blir endret slik at de peker på hverandre istedet for den 
+noden som nå fjernes. Til slutt blir antall redusert med 1, endringer blir inkrementert med 1, og den lagrede verdien returneres. 
+Metoden fjern(T verdi) behandler spesialtilfellene på lit måte. Det som skiller denen metoden ut er at den bruker en for løkke som leter etter en node
+med etterlyste verdien. Hvis slik verdi blir funner så fjernes den på lik måte som i fjern(int indeks), variabelen result endres til true og for-løkka 
+blir avbrutt.
+
+Metoden i 8a) implementeres ved å først sjekke om de to spesialtilfellene i oppgaveteksten skjer, slik at en passene exception blir gitt. Deretter settes
+fjernOK til true og verdien til nåværende "denne" node blir lagret i en temp variabel og denne blir endret til denne sin neste. Til slutt returneres temp.
+Metoden i 8b) implementeres kort ved bare en return statement.
+Konstruktøren i 8c) implementeres ved å finne denne noden ved bruk av metoden finnNode(indeks). deretter endres fjernOK til false, og iteratorendringer
+settes lik endringer.
+Metoden i 8d) implementeres kort ved å først bruke indeksKontroll() på indeksen, og så returnere en instans av iteratorklassen ved bruk ak konstruktøren
+fra 8c).
+
+Måtene i oppgave 7 ble implementert ble implementert slik som beskrevet i oppgaveteksten. Tidsmålinger ble foretatt i en separat testfil ved å bruke
+System.currentTimeMillis() metoden. Testene resulterte i at måte 1 var raskest og blir dermed brukt videre.
+
+Alle warnings som er igjen i DobbeltLenketListe.java utenom en, tilhører metoder som var kodet før oppgaven var levert ut. Den enestående warningen
+er knyttet til et return-statement som skal avslutte funskjonen for meg. Den skaper ingen problemer. Oppgave 7 ble gjort frivillig.
 
