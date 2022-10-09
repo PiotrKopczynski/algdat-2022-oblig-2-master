@@ -56,6 +56,15 @@ class DobbeltLenketListeTest {
 
     @Test
     void nullstill() {
+
+        Liste<Integer> liste = new DobbeltLenketListe<>();
+        for (int i = 0; i < 10000; i++) liste.leggInn(i);
+        long tid = System.currentTimeMillis();
+        liste.nullstill();
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Lista: " + liste.toString());
+        System.out.println("Tiden ble: " + tid);
+        assertEquals(0,0);
     }
 
     @Test
