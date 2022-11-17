@@ -1174,7 +1174,7 @@ class Oblig2Test {
     }
 
     ////// Oppgave 9 /////////////////////
-    /*
+
     @org.junit.jupiter.api.Test
     void oppgave9() {
         int antallFeil = 0;
@@ -1325,6 +1325,5 @@ class Oblig2Test {
         assertEquals(0, antallFeil, "Du har for mange feil i oppgave 10");
 
     }
-     */
 
 }
